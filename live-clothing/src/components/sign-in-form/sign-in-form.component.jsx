@@ -38,7 +38,12 @@ const SignInForm = () => {
       );
       console.log(response);
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      if (error.code === "auth/invalid-credential") {
+        alert("invalid credentials");
+      }
+      console.log(error);
+    }
   };
 
   const handleChange = (event) => {
