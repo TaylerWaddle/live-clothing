@@ -1,11 +1,12 @@
 import { CartContext } from "../../contexts/cart.context";
 import { useContext } from "react";
 
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems, addItemToCart, removeItemFromCart } =
-    useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   return (
     <div className="checkout-container">
@@ -27,17 +28,9 @@ const Checkout = () => {
         </div>
       </div>
 
-      {cartItems.map((cartItem) => {
-        const { id, name, quantity } = cartItem;
-        return (
-          <div key={id}>
-            <h2>{name}</h2>
-            <span>{quantity}</span>
-            <span onClick={() => removeItemFromCart(cartItem)}>decrement</span>
-            <span onClick={() => addItemToCart(cartItem)}>increment</span>
-          </div>
-        );
-      })}
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem}></CheckoutItem>
+      ))}
       <span className="total">Total: 0</span>
     </div>
   );
